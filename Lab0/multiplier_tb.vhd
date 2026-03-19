@@ -36,11 +36,6 @@ begin
     report "Testing multiplier at " & real'image(TARGET_FREQ / 1.0e6) & " MHz (" &
            integer'image(TARGET_PERIOD/1 ps) & " ps per operation)..." severity note;
 
-    --Qui aggiungo qualcosa, però mi sa he l'ho scritto male.
-    -- a <= (others  => '0');
-    --  b <= (others  => '0');
-    --  wait for 50 ns;
-
     -- Test subset of cases (16×16 = 256 tests) 
     -- Complete coverage of all 8-bit inputs would require 65536 tests, which 
     -- is more computationally intensive
