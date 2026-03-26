@@ -32,17 +32,19 @@ begin
     report "Testing adder at " & real'image(TARGET_FREQ / 1.0e6) & " MHz (" &
            integer'image(TARGET_PERIOD/1 ps) & " ps per operation)..." severity note;
 
-    -- wait for 30 ns;
+    wait for 30 ns;
 
-    for i in 0 to 15 loop
-      for j in 0 to 15 loop
+    for i in 0 to 255 loop
+      for j in 0 to 255 loop
         a <= std_logic_vector(to_unsigned(i, 8));
         b <= std_logic_vector(to_unsigned(j, 8));
 
         wait for TARGET_PERIOD;
 
         ref := i + j;
-        if sum /= (std_logic_vector(to_unsigned(ref, 8))) then
+        -- qui al posto di di sum, c'è la concatenazione di cout e sum e si
+        -- compara con un numero a 9 bit, al posto di 8 bit
+        if cout & sum /= (std_logic_vector(to_unsigned(ref, 9))) then
           report "FAILED: " & integer'image(i) & " + " &
                  integer'image(j) & " = " & integer'image(ref) &
                  ", got " & integer'image(to_integer(unsigned(sum)))
