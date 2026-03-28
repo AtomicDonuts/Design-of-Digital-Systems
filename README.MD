@@ -1,4 +1,4 @@
-### Codici condivisi per il corso di Design of Digital Systems for yada yada.
+# Codici condivisi per il corso di Design of Digital Systems for yada yada.
 
 I commenti e i codici riportate potrebbero essere fatte un po' con il culo. 
 
