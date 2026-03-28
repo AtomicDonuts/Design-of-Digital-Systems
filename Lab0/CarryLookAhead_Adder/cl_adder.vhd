@@ -13,12 +13,11 @@ entity cl_adder is
 end cl_adder;
 
 architecture structural of cl_adder is
-    signal c : std_logic_vector(n downto 0); -- definisce un segnale C, per tener conto dei carry(?)
-
+    signal c, prop, gen : std_logic_vector(n downto 0); -- definisce un segnale C, per tener conto dei carry(?)
   component cla --qui gli spiega la topologia della componente che usa
-    port (
+    port(
       a, b, cin : in  std_logic;
-      sum, cout : out std_logic
+      sum, prop, gen : out std_logic
     );
   end component;
 
@@ -30,9 +29,10 @@ begin
     cla: cla port map (
       a    => a(i),  
       b    => b(i),
-      cin  => c(i),
+      prop => prop(i),
+      gen  => gen(i),
       sum  => sum(i),
-      cout => c(i+1)
+      cin  => gen(i) or (prop(i) and gen(i))
     );
   end generate;
 

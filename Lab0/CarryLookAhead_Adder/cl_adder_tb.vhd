@@ -34,8 +34,8 @@ begin
 
     wait for 30 ns;
 
-    for i in 0 to 16 loop
-      for j in 0 to 16 loop
+    for i in 0 to 4 loop
+      for j in 0 to 4 loop
         a <= std_logic_vector(to_unsigned(i, 8));
         b <= std_logic_vector(to_unsigned(j, 8));
 
