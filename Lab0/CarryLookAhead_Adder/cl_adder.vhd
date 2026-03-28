@@ -8,7 +8,7 @@ entity cl_adder is
   port (
     a, b : in  std_logic_vector(n-1 downto 0);
     sum  : out std_logic_vector(n-1 downto 0);
-    cout : out std_logic;
+    cout : out std_logic
   );
 end cl_adder;
 
