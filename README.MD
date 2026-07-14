@@ -12,9 +12,9 @@ i file .sh sono file di shell per evitare di compilare a mano tutto ogni volta. 
 ### Lab 1
 
 ### Lab 2
-#
+
 ### Lab 3
-#
+
 ### Lab 4
-#
+
 ### Lab 5
