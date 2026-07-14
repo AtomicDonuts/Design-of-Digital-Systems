@@ -1,0 +1,100 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{mathtools}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{listings}
+
+% Definizione dei colori per l'evidenziazione della sintassi
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{codeblue}{rgb}{0.1,0.4,0.8}
+
+% Configurazione dello stile per il codice XDC/TCL
+\lstdefinestyle{xdcstyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{codeblue}\bfseries,
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    language=Tcl % I file XDC utilizzano la sintassi Tcl
+}
+
+% Configurazione margini e spazi
+\geometry{margin=2.5cm}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+
+\title{Design of Digital Systems for Radiation Detection\\
+       {Consegne Laboratorio 1}}
+\author{Pasquale Napoli}
+\date{}
+\begin{document}
+
+\maketitle
+
+\section*{Constraint}
+Usando le schematics rilasciate dal produttore della scheda, è possibile rintracciare a quale pin sono collegati i vari LED e Switch.
+In realtà, facendo sufficiente attenzione, è possibile notare che sulla scheda, in corrispondenza di ogni LED, Switch e Pulsante, sono stampati sia i nomi dei componenti, sia il pin a cui sono collegati. 
+Si riporta un estratto del file boolean.xdc, dove sono stati sostituiti i valori mancanti al posto delle ``{\color{red}XX}''.
+
+\begin{lstlisting}[style=xdcstyle, caption={Estratto di boolean.xdc, il codice può essere trpvat per intero \href{https://github.com/AtomicDonuts/Design-of-Digital-Systems/tree/main/Lab1/Consegne}{\color{blue}qui}.} ]
+## Clock input (100 MHz oscillator)
+set_property -dict { PACKAGE_PIN F14 IOSTANDARD LVCMOS33 } [get_ports { CLK100 }]
+create_clock -period 10.000 -waveform {0.000 5.000} -name clk100 [get_ports { CLK100 }]
+
+## Switches SW[15:0]
+
+set_property -dict { PACKAGE_PIN V2 IOSTANDARD LVCMOS33 } [get_ports { SW[0] }]
+set_property -dict { PACKAGE_PIN U2 IOSTANDARD LVCMOS33 } [get_ports { SW[1] }]
+set_property -dict { PACKAGE_PIN U1 IOSTANDARD LVCMOS33 } [get_ports { SW[2] }]
+set_property -dict { PACKAGE_PIN T2 IOSTANDARD LVCMOS33 } [get_ports { SW[3] }]
+...
+
+## LEDs LED[15:0]
+
+set_property -dict { PACKAGE_PIN G1 IOSTANDARD LVCMOS33 } [get_ports { LED[0] }]
+set_property -dict { PACKAGE_PIN G2 IOSTANDARD LVCMOS33 } [get_ports { LED[1] }]
+set_property -dict { PACKAGE_PIN F1 IOSTANDARD LVCMOS33 } [get_ports { LED[2] }]
+set_property -dict { PACKAGE_PIN F2 IOSTANDARD LVCMOS33 } [get_ports { LED[3] }]
+
+...
+\end{lstlisting}
+\newpage
+\section*{Bitstream}
+Dopo aver inserito correttamente tutti il file di constraint e i file in VHDL, il design è stato sintetizzato, implementato ed è stato generato il bitstream.
+Si inserisce la prova della corretta generazione del bitstream in Fig.\ref{fig:bitstream}.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Bitstream_Generation_Completed.png}
+    \caption{Corretta generazione del Bitstream}
+    \label{fig:bitstream}
+\end{figure}
+\section*{Caricamento sulla scheda}
+Infine il design è stato caricato sulla scheda. 
+Il corretto funzionamento è stato testato utilizzando delle operazioni di prova.
+Un esempio è mostrato in Fig.\ref{fig:3x5}. 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\linewidth]{3x5.jpeg}
+    \caption{Prova della moltiplicazione tra 5 e 3, con il corretto risultato 15.}
+    \label{fig:3x5}
+\end{figure}
+
+\end{document}
