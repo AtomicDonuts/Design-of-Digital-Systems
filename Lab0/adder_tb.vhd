@@ -40,6 +40,7 @@ begin
         b <= std_logic_vector(to_unsigned(j, 8));
 
         wait for TARGET_PERIOD;
+        -- wait for 17 ns;
 
         ref := i + j;
         -- qui al posto di di sum, c'è la concatenazione di cout e sum e si

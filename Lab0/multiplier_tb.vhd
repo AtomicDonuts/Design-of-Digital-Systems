@@ -19,9 +19,9 @@ architecture arch of multiplier_tb is
   signal p    : std_logic_vector(15 downto 0) := (others => '0');
 
   -- Ho definito 100MHz di frequenza
-  -- constant TARGET_FREQ : real := 100.0e6;
+   constant TARGET_FREQ : real := 100.0e6;
   -- per consentire la propagazione
-  constant TARGET_FREQ : real := 2.381e7;
+  -- constant TARGET_FREQ : real := 2.381e7;
   -- Tipo time, molto figo
   constant TARGET_PERIOD : time := 1 sec / TARGET_FREQ;
 
@@ -45,7 +45,7 @@ begin
     -- prendiamo un subset 16x16  perchè per prenderli tutti ci vuole una vita.
 
     -- Questo pezzo serve per risolvere il warning inizial
-    wait for 30 ns;
+    wait for 25 ns;
 
     -- iniziamo 2 loop, in cui sostanzialmente incrementiamo i fattori da moltiplicare. 
     for i in 0 to 255 loop
@@ -56,7 +56,8 @@ begin
         -- Wait for target period
 
         -- simulazione fenomeno clockato
-        wait for TARGET_PERIOD;
+        -- wait for TARGET_PERIOD;
+        wait for 42 ns;
         -- Check result
 
         -- facciamo il prodotto "normale" tra i e j, che poi sono i numeri che 
