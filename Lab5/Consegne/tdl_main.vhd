@@ -293,35 +293,34 @@ begin
     enable_measurement  <= '0';
     enable_datatransfer <= '0';
   elsif rising_edge(clk_fast) then
-    -- TODO:
-
     -- enable_calibration should be activated with when switch(0) is active
-    if sw_active(0) = '1' then
+
+    if sw_active(0) = '1' and sw_active(1) = '0' and sw_active(2) = '0' then
       enable_calibration  <= '1';
       enable_measurement  <= '0';
       enable_datatransfer <= '0';
-
+    
     -- enable_measurement should be activated with when switch(1) is active
-    else 
-      if sw_active(1) = '1' then
-        enable_calibration  <= '0';
-        enable_measurement  <= '1';
-        enable_datatransfer <= '0';
-      else
-        -- enable_datatransfer should be activated with when switch(2) is active
-        if sw_active(2) = '1' then
-          enable_calibration  <= '0';
-          enable_measurement  <= '0';
-          enable_datatransfer <= '1';
-        else
-          enable_calibration  <= '0';
-          enable_measurement  <= '0';
-          enable_datatransfer <= '0';
-        end if;
-      end if;
-    end if ;
-    -- if more than one switch is active at the same time do not enable any function.
 
+    elsif sw_active(0) = '0' and sw_active(1) = '1' and sw_active(2) = '0' then
+      enable_calibration  <= '0';
+      enable_measurement  <= '1';
+      enable_datatransfer <= '0';
+
+    -- enable_datatransfer should be activated with when switch(2) is active
+
+    elsif sw_active(0) = '0' and sw_active(1) = '0' and sw_active(2) = '1' then
+      enable_calibration  <= '0';
+      enable_measurement  <= '0';
+      enable_datatransfer <= '1';
+
+    -- if more than one switch is active at the same time do not enable any function.
+    
+    else
+      enable_calibration  <= '0';
+      enable_measurement  <= '0';
+      enable_datatransfer <= '0';
+    end if;
   end if;
 end process;
 
