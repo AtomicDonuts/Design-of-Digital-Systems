@@ -81,10 +81,10 @@ uart_rxd_cdc 	: entity work.simple_cdc port map(clk => clk_int, sig_in => UART_r
 
 UART_com_i : entity work.UART_com
 	generic map(
-        N => 9, 			-- : integer := 4;   -- number of bits (Data bits + stop bits)
+        N => 9, 			-- number of bits (Data bits + stop bits)
         M => 326, 			-- 38400 Baud rate with 200 MHz clock
-        DBIT    => 8,  		--: integer := 8;   -- # data bits
-        SB_TICK => 16  		--: integer := 16   -- # ticks for stop bits
+        DBIT    => 8,  		-- # data bits
+        SB_TICK => 16  		-- # ticks for stop bits
     )
     port map( 
 	  clk 			=> clk_int,
