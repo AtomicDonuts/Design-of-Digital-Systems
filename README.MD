@@ -1,4 +1,4 @@
-#Design of Digital Systems for Radiation Detection.
+# Design of Digital Systems for Radiation Detection.
 
 Questo archivio raccoglie il codice sorgente, i testbench e i file di configurazione sviluppati per le esercitazioni pratiche e le relazioni del corso di Design of Digital Systems.
 
